@@ -1,0 +1,44 @@
+<div class="main">
+  <h1 style="text-align: center;font-family:'Times New Roman';color: #ed1c24 ">Manage your Tasks!</h1>
+  <br>
+  <div class="newTask">
+  <form >
+  <input type="text" class="form-group" placeholder="type your task!" name="task" [(ngModel)]="newTask">
+  <button (click)="onAdd()" class="btn-primary">Add Task</button>
+  </form>
+</div>
+
+
+    <div>
+
+  <table class="table">
+
+
+    <div *ngFor="let t of task">
+     <div [ngStyle]="t.done?{'text-decoration':'line-through'}:{'text-decoration':'none'}" style="padding: 3%" [ngClass]="t.done?'panel panel-info':'panel panel-danger'">
+      <tr class="tbleR">
+       <td [hidden]="t.done"> <input type="checkbox" (click)="isChecked(t)" ></td>
+     <td [hidden]="!t.done">   <input type="checkbox" (click)="isChecked(t)" checked ></td>
+      <td>{{t.description}}</td>&nbsp;
+        <td><button (click)="onModify(t)" class="btn-warning btn-sm" >modify</button></td>
+      <td><button (click)="onDelete(t)" class="btn-danger btn-sm" >delete</button></td>
+      </tr>
+     </div>
+    </div>
+
+    </table>
+  </div>
+  <div class="panel panel-warning" style="padding-left: 22%"  [hidden]="previousTask==null">
+    <h3>Modify Task</h3>
+    <form>
+    <input type="text" name="modify" [(ngModel)]="modifyElement.description">
+    <button class="btn btn-default btn-sm" (click)="onUpdate()">Update</button>
+      <button class="btn  btn-sm" (click)="onCancel()">Cancel</button>
+
+    </form>
+  </div>
+
+
+</div>
+
+
